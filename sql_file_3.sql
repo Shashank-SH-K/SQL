@@ -646,13 +646,14 @@ select avg(amount) from payment;
 select count(amount) as total_count, sum(amount) as total_number_amount_spend, avg(amount) as total_number_average_amount_spend from payment where customer_id = 1;
 
 
+
 -- Q2. calculate total number of transcation done by each customer and calculate total amount spend by each customer and calculate average amount spend by each customer  using group by
 select customer_id, count(amount) as number_of_transcation, sum(amount) as total_amount_spend, avg(amount) as average_amount_spend from payment group by customer_id;
 
 
 -- Q3. get the total number of customer serve by staff_id = 1
-select staff_id, count(payment_id) as total_count from payment where staff_id = 1 group by staff_id; -- this is the best practice apply where clause before group by
-select staff_id, count(payment_id) as number_of_payment from payment group by staff_id having staff_id = 1; 
+select staff_id, count(distinct customer_id) as total_count from payment where staff_id = 1 group by staff_id; -- this is the best practice apply where clause before group by
+select staff_id, count(distinct customer_id) as number_of_customer from payment group by staff_id having staff_id = 1; 
 
 
 
@@ -670,6 +671,8 @@ select month(payment_date) as month_name, sum(amount) AS total_amount_spend, max
 select year(payment_date) as years, month(payment_date) as months, count(amount) as number_of_transcation, avg(amount) as average_number_of_transcation from payment group by year(payment_date), month(payment_date);
 
 -- best approch to follow year with month and with count(*) 
-select year(payment_date) as years, month(payment_date) as months, count(*) as number_of_transcation, avg(amount) as average_number_of_amount from payment group by year(payment_date), month(payment_date) order by years, months;
+select month(payment_date) as months, count(*) as number_of_transcation, avg(amount) as average_number_of_amount from payment group by months order by months;
 
 select * from payment;
+
+
