@@ -265,4 +265,16 @@ select staff_id, month(payment_date) as months, avg(amount) as average from paym
 
 -- Q. what is SQL and type of sql languages
 
+use sakila;
+ 
+ select * from payment;
+ 
+ select count(payment_id) from payment where staff_id = 1;
+ 
+ 
+ select staff_id, count(payment_id) from payment group by staff_id having count(payment_id) > 8000;
+ 
+ select staff_id, count(*) from payment where amount = 4.99 group by staff_id having staff_id = 1; 
+ 
+ 
  
